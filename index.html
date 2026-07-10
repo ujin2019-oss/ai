@@ -30,7 +30,7 @@
     <section class="hero" id="hero">
 
       <!-- [이미지 슬롯 1] hero_bg.jpg -->
-      <div class="hero__bg img-slot" data-slot="hero_bg.jpg / 1920×820">
+      <div class="hero__bg img-slot" data-slot="hero_bg.jpg / 1920×895">
         <img src="images/hero_bg.jpg" alt="">
       </div>
       <div class="hero__overlay" aria-hidden="true"></div>
@@ -80,14 +80,15 @@
 
 
     <!-- ══════════════════════════════════════════════════════════
-         03. FEATURES — 아이콘 6 (핵심 혜택)
+         03. FEATURES — 아이콘 6 (제품 혜택)
          아이콘은 inline SVG 이므로 별도 이미지가 필요 없습니다.
+         
          ══════════════════════════════════════════════════════════ -->
     <section class="section features" id="features">
       <div class="container">
 
         <header class="section__head reveal">
-          <h2 class="section__title">핵심 혜택</h2>
+          <h2 class="section__title">제품 혜택</h2>
         </header>
 
         <ul class="features__list">
@@ -246,9 +247,37 @@
           <div class="offer__inner">
 
             <div class="offer__badge" aria-hidden="true">
-              <span class="offer__badge-rule"></span>
+
+              <!-- 이중 외곽선 카르투슈 (8각 첨두 + 오목한 변) -->
+              <svg class="offer__badge-frame" viewBox="0 0 200 150" fill="none"
+                   stroke="currentColor">
+                <path stroke-width="1.4"
+                      d="M 100 6 Q 124 17.6 152 20 Q 167.5 49.6 194 75 Q 167.5 100.4 152 130
+                         Q 124 132.3 100 144 Q 76 132.3 48 130 Q 32.5 100.4 6 75
+                         Q 32.5 49.6 48 20 Q 76 17.6 100 6 Z"/>
+                <path stroke-width="0.8" opacity=".7"
+                      d="M 100 13 Q 122.3 23.5 148.1 25.6 Q 162.5 52.1 187 75
+                         Q 162.5 97.9 148.1 124.4 Q 122.3 126.5 100 137 Q 77.7 126.5 51.9 124.4
+                         Q 37.5 97.9 13 75 Q 37.5 52.1 51.9 25.6 Q 77.7 23.5 100 13 Z"/>
+              </svg>
+
+              <!-- 위아래 작은 장식 -->
+              <svg class="offer__badge-flourish" viewBox="0 0 48 12" fill="none"
+                   stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+                <path d="M24 1.5 L26 6 L24 10.5 L22 6 Z" fill="currentColor" stroke="none"/>
+                <path d="M20.5 6 C16 6 12 4.6 8 6"/>
+                <path d="M27.5 6 C32 6 36 4.6 40 6"/>
+              </svg>
+
               <span class="offer__badge-text">LIMITED<br>OFFER</span>
-              <span class="offer__badge-rule"></span>
+
+              <svg class="offer__badge-flourish offer__badge-flourish--flip" viewBox="0 0 48 12"
+                   fill="none" stroke="currentColor" stroke-width="0.9" stroke-linecap="round">
+                <path d="M24 1.5 L26 6 L24 10.5 L22 6 Z" fill="currentColor" stroke="none"/>
+                <path d="M20.5 6 C16 6 12 4.6 8 6"/>
+                <path d="M27.5 6 C32 6 36 4.6 40 6"/>
+              </svg>
+
             </div>
 
             <div class="offer__content">
