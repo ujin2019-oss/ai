@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIERO — 클래식의 품격, 전동의 자유</title>
+  <meta name="description" content="클래식 디자인과 최첨단 기술의 완벽한 조화. 전동자전거 HIERO CLASSIC.">
+
+  <!-- 폰트: 클래식 컨셉의 명조 계열 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#hero">본문 바로가기</a>
+
+  <!-- ══════════════════════════════════════════════════════════
+       공통 헤더 — components.js 에서 삽입됩니다
+       ══════════════════════════════════════════════════════════ -->
+  <div id="site-header"></div>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════════════════════
+         01. HERO — 메인 비주얼
+         ══════════════════════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+
+      <!-- [이미지 슬롯 1] hero_bg.jpg -->
+      <div class="hero__bg img-slot" data-slot="hero_bg.jpg / 1920×820">
+        <img src="images/hero_bg.jpg" alt="">
+      </div>
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="container hero__inner">
+        <div class="hero__content reveal">
+          <h1 class="hero__title">
+            클래식의 품격,<br>
+            전동의 자유
+          </h1>
+          <p class="hero__desc">일상도 여행도, 히어로와 함께</p>
+          <span class="hero__rule" aria-hidden="true"></span>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         02. BANNER — 띠배너
+         ══════════════════════════════════════════════════════════ -->
+    <section class="banner" id="banner">
+      <div class="container">
+        <p class="banner__text reveal">
+          <span class="banner__ornament" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+              <path d="M16 28V8"/>
+              <path d="M16 22c-5 0-8-3-8-7 4 0 8 2 8 7z"/>
+              <path d="M16 16c-4 0-7-2.5-7-6 3.5 0 7 1.5 7 6z"/>
+              <path d="M16 10c-3 0-5.5-2-5.5-5 3 0 5.5 1.5 5.5 5z"/>
+            </svg>
+          </span>
+
+          <span class="banner__label">클래식 디자인과 최첨단 기술의 완벽한 조화</span>
+
+          <span class="banner__ornament banner__ornament--flip" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+              <path d="M16 28V8"/>
+              <path d="M16 22c-5 0-8-3-8-7 4 0 8 2 8 7z"/>
+              <path d="M16 16c-4 0-7-2.5-7-6 3.5 0 7 1.5 7 6z"/>
+              <path d="M16 10c-3 0-5.5-2-5.5-5 3 0 5.5 1.5 5.5 5z"/>
+            </svg>
+          </span>
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         03. FEATURES — 아이콘 6 (핵심 혜택)
+         아이콘은 inline SVG 이므로 별도 이미지가 필요 없습니다.
+         ══════════════════════════════════════════════════════════ -->
+    <section class="section features" id="features">
+      <div class="container">
+
+        <header class="section__head reveal">
+          <h2 class="section__title">핵심 혜택</h2>
+        </header>
+
+        <ul class="features__list">
+
+          <li class="feature reveal">
+            <span class="feature__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 40c0-14 8-26 24-30 2 16-4 28-18 30z" fill="currentColor" stroke="none"/>
+                <path d="M13 39c4-11 10-17 20-21" stroke="var(--color-bg-alt)"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">최대 100km</h3>
+            <p class="feature__desc">강력한 주행거리</p>
+          </li>
+
+          <li class="feature reveal">
+            <span class="feature__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="17" width="23" height="17" rx="2" fill="currentColor" stroke="none"/>
+                <rect x="32" y="22" width="7" height="8" fill="currentColor" stroke="none"/>
+                <path d="M13 13h7M25 13h7" stroke-width="2.6"/>
+                <path d="M16.5 17v-4M28.5 17v-4" stroke-width="2.6"/>
+                <circle cx="20.5" cy="25.5" r="4" stroke="var(--color-bg-alt)"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">250W 고성능 모터</h3>
+            <p class="feature__desc">부드러운 주행감</p>
+          </li>
+
+          <li class="feature reveal">
+            <span class="feature__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="7" y="17" width="30" height="15" rx="3" fill="currentColor" stroke="none"/>
+                <rect x="38" y="21" width="4" height="7" rx="1" fill="currentColor" stroke="none"/>
+                <path d="M23.5 20l-4.5 6.2h5l-2 5.3" stroke="var(--color-bg-alt)" stroke-width="2"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">탈착식 배터리</h3>
+            <p class="feature__desc">간편한 충전</p>
+          </li>
+
+          <li class="feature reveal">
+            <span class="feature__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M24 6l15 6v10c0 9-6 16-15 20-9-4-15-11-15-20V12z" fill="currentColor" stroke="none"/>
+                <path d="M17 23.5l5 5 9-10.5" stroke="var(--color-bg-alt)" stroke-width="2.6"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">안전한 제동 시스템</h3>
+            <p class="feature__desc">더블 디스크 브레이크</p>
+          </li>
+
+          <li class="feature reveal">
+            <span class="feature__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="24" cy="25" r="16"/>
+                <path d="M24 15v10l7 4"/>
+                <path d="M18 6h12"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">스마트 디스플레이</h3>
+            <p class="feature__desc">직관적인 정보 확인</p>
+          </li>
+
+          <li class="feature reveal">
+            <span class="feature__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M8 16l16-8 16 8v18l-16 8-16-8z"/>
+                <path d="M8 16l16 8 16-8"/>
+                <path d="M24 24v18"/>
+                <path d="M17 11.5l12 6"/>
+              </svg>
+            </span>
+            <h3 class="feature__title">접이식 프레임</h3>
+            <p class="feature__desc">간편한 보관과 이동</p>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         04. PRODUCTS — 상품 4 제품 카드
+         ══════════════════════════════════════════════════════════ -->
+    <section class="section products" id="products">
+      <div class="container">
+
+        <header class="section__head reveal">
+          <h2 class="section__title">제품 소개</h2>
+        </header>
+
+        <ul class="products__grid">
+
+          <li class="card reveal">
+            <!-- [이미지 슬롯 2] product01.jpg -->
+            <div class="card__thumb img-slot" data-slot="product01.jpg / 800×600">
+              <img src="images/product01.jpg" alt="HIERO CLASSIC A 전동자전거">
+            </div>
+            <div class="card__body">
+              <h3 class="card__name">HIERO CLASSIC A</h3>
+              <p class="card__tagline">클래식의 기준</p>
+              <p class="card__price">₩ 1,690,000</p>
+            </div>
+          </li>
+
+          <li class="card reveal">
+            <!-- [이미지 슬롯 3] product02.jpg -->
+            <div class="card__thumb img-slot" data-slot="product02.jpg / 800×600">
+              <img src="images/product02.jpg" alt="HIERO CLASSIC B 전동자전거">
+            </div>
+            <div class="card__body">
+              <h3 class="card__name">HIERO CLASSIC B</h3>
+              <p class="card__tagline">도심을 위한 선택</p>
+              <p class="card__price">₩ 1,890,000</p>
+            </div>
+          </li>
+
+          <li class="card reveal">
+            <!-- [이미지 슬롯 4] product03.jpg -->
+            <div class="card__thumb img-slot" data-slot="product03.jpg / 800×600">
+              <img src="images/product03.jpg" alt="HIERO CLASSIC C 전동자전거">
+            </div>
+            <div class="card__body">
+              <h3 class="card__name">HIERO CLASSIC C</h3>
+              <p class="card__tagline">자유로운 모험</p>
+              <p class="card__price">₩ 2,090,000</p>
+            </div>
+          </li>
+
+          <li class="card reveal">
+            <!-- [이미지 슬롯 5] product04.jpg -->
+            <div class="card__thumb img-slot" data-slot="product04.jpg / 800×600">
+              <img src="images/product04.jpg" alt="HIERO CLASSIC D 전동자전거">
+            </div>
+            <div class="card__body">
+              <h3 class="card__name">HIERO CLASSIC D</h3>
+              <p class="card__tagline">프리미엄 퍼포먼스</p>
+              <p class="card__price">₩ 2,390,000</p>
+            </div>
+          </li>
+
+        </ul>
+
+
+        <!-- ────────────────────────────────────────────────────
+             04-1. OFFER — 특별 혜택 배너
+             ──────────────────────────────────────────────────── -->
+        <div class="offer reveal" id="offer">
+
+          <!-- [이미지 슬롯 6] offer-bg.jpg -->
+          <div class="offer__bg img-slot" data-slot="offer-bg.jpg / 1600×500">
+            <img src="images/offer-bg.jpg" alt="">
+          </div>
+
+          <div class="offer__inner">
+
+            <div class="offer__badge" aria-hidden="true">
+              <span class="offer__badge-rule"></span>
+              <span class="offer__badge-text">LIMITED<br>OFFER</span>
+              <span class="offer__badge-rule"></span>
+            </div>
+
+            <div class="offer__content">
+              <h2 class="offer__title">지금 구매 시, 특별 혜택!</h2>
+              <p class="offer__desc">전용 가방 <span aria-hidden="true">+</span> 헬맷 <span aria-hidden="true">+</span> 1년 무상 A/S</p>
+              <a class="btn btn--primary" href="#">혜택 자세히 보기</a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════
+       공통 푸터 — components.js 에서 삽입됩니다
+       ══════════════════════════════════════════════════════════ -->
+  <div id="site-footer"></div>
+
+  <script src="components.js"></script>
+  <script src="action.js"></script>
+</body>
+</html>

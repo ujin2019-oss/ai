@@ -1,0 +1,789 @@
+@charset "utf-8";
+
+/* ==========================================================================
+   HIERO — 전동자전거 랜딩페이지 / 클래식 컨셉
+   --------------------------------------------------------------------------
+   목차
+   00. 디자인 토큰 (CSS 변수)  ← 여기만 고치면 사이트 전체 톤이 바뀝니다
+   01. 리셋 & 기본
+   02. 레이아웃 유틸 (container / section)
+   03. 공통 컴포넌트 (버튼 / 로고 / 이미지 슬롯 / 스크롤 등장)
+   04. 헤더 & 모바일 내비
+   05. 히어로
+   06. 띠배너
+   07. 아이콘 6
+   08. 상품 4
+   09. 특별 혜택 배너
+   10. 푸터
+   11. 반응형
+   ========================================================================== */
+
+
+/* ==========================================================================
+   00. 디자인 토큰
+   ========================================================================== */
+:root {
+
+  /* ── 색상 ──────────────────────────────────────────────── */
+  --color-main: #095544;          /* 메인: 딥 에메랄드 (헤더 CTA, 푸터, 띠배너) */
+  --color-main-dark: #06302B;     /* 메인 어두운 톤 (hover) */
+  --color-sub: #8A7355;           /* 서브: 브라운 (보조 텍스트, 라인) */
+  --color-point: #B58C4F;         /* 포인트: 골드 (밝은 배경 위 장식, 강조) */
+  --color-point-light: #D6B173;   /* 포인트 밝은 톤 (어두운 배경 위 텍스트용) */
+
+  --color-bg: #FAF8F4;            /* 배경: 아주 옅은 웜 화이트 (넓은 면) */
+  --color-bg-alt: #F2EDE1;        /* 배경 보조: 카드 이미지 영역 (좁은 면에만 크림) */
+  --color-surface: #FFFFFF;       /* 카드 표면 */
+  --color-border: #E4DDCE;        /* 테두리 */
+
+  --color-text: #2B2723;          /* 본문 텍스트 */
+  --color-text-sub: #6E675C;      /* 보조 텍스트 */
+  --color-text-invert: #F3EEE0;   /* 어두운 배경 위 텍스트 */
+
+  /* ── 폰트 패밀리 ───────────────────────────────────────── */
+  --font-serif: "Noto Serif KR", "Nanum Myeongjo", serif;                  /* 제목 */
+  --font-sans: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;          /* 본문 */
+  --font-display: "Cormorant Garamond", "Noto Serif KR", serif;            /* 로고·영문 */
+
+  /* ── 글자 크기 (계층별) ────────────────────────────────── */
+  --fs-hero: clamp(2rem, 3.4vw, 3.25rem);     /* h1  히어로 타이틀 (32 → 52px) */
+  --fs-h2: clamp(1.5rem, 2.6vw, 2rem);        /* h2  섹션 타이틀 */
+  --fs-h3: clamp(1.5rem, 2.4vw, 1.875rem);    /* h3  배너 타이틀 */
+  --fs-h4: 1.0625rem;                         /* h4  카드 제목 */
+  --fs-lead: clamp(1rem, 1.6vw, 1.25rem);     /* 리드문 */
+  --fs-body: 1rem;                            /* 본문 */
+  --fs-sm: 0.9375rem;                         /* 작은 본문 */
+  --fs-xs: 0.8125rem;                         /* 캡션 */
+  --fs-logo: 1.75rem;                         /* 로고 */
+
+  /* ── 글자 두께 ─────────────────────────────────────────── */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ── 행간 / 자간 ───────────────────────────────────────── */
+  --lh-tight: 1.3;
+  --lh-base: 1.6;
+  --lh-loose: 1.8;
+  --ls-tight: -0.02em;
+  --ls-wide: 0.08em;
+  --ls-wider: 0.22em;
+
+  /* ── 간격 (여백 스케일) ────────────────────────────────── */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* ── 섹션 간격 ─────────────────────────────────────────── */
+  --section-py: clamp(72px, 9.5vw, 128px);    /* 섹션 상하 패딩 */
+  --section-head-mb: clamp(40px, 5vw, 68px);  /* 섹션 제목 아래 여백 */
+  --block-gap: clamp(40px, 5.5vw, 80px);      /* 섹션 내부 블록 간격 */
+
+  /* ── 컨테이너 ──────────────────────────────────────────── */
+  --container-max: 1060px;                    /* 콘텐츠 최대 폭 */
+  --container-px: clamp(20px, 4vw, 40px);     /* 좌우 여백 */
+  --grid-gap: clamp(16px, 1.8vw, 24px);       /* 그리드 간격 */
+
+  /* ── 모서리 (border-radius) ────────────────────────────── */
+  --radius-xs: 3px;
+  --radius-sm: 3px;
+  --radius-md: 3px;
+  --radius-lg: 3px;
+  --radius-pill: 999px;   /* 원형 요소(SNS 아이콘)는 예외 */
+
+  /* ── 그림자 / 모션 / 기타 ──────────────────────────────── */
+  --shadow-sm: 0 1px 3px rgba(43, 39, 35, .06);
+  --shadow-card: 0 4px 18px rgba(43, 39, 35, .07);
+  --shadow-header: 0 1px 0 rgba(43, 39, 35, .08);
+
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --transition: .3s var(--ease);
+
+  --header-h: 76px;                           /* 헤더 높이 */
+
+  /* ── 히어로 ────────────────────────────────────────────── */
+  /* 히어로 이미지의 가로/세로 비율. 현재 hero_bg.jpg = 1919×820 = 2.34
+     상단 110px 은 투명 헤더가 겹치는 여백입니다.
+     다른 비율의 이미지로 교체하면 이 숫자만 바꾸세요. */
+  --hero-ratio: 2.34;
+
+  /* 히어로 높이 = 화면 폭 ÷ 이미지 비율.
+     즉 이미지가 잘리지 않는 딱 그 높이입니다. */
+  --hero-h: clamp(420px, calc(100vw / var(--hero-ratio)), 900px);
+
+  /* 배경 이미지 초점: 가로 세로
+     가로 0%=왼쪽 / 100%=오른쪽,  세로 0%=위쪽 / 100%=아래쪽
+     아래쪽(100%)에 고정해, 혹시 잘리더라도 바퀴가 아닌 위쪽 벽면부터 잘려나갑니다 */
+  --hero-pos: 50% 100%;
+
+  --banner-h: clamp(64px, 5.6vw, 88px);       /* 띠배너 높이 */
+}
+
+
+/* ==========================================================================
+   01. 리셋 & 기본
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p, ul, figure { margin: 0; }
+ul { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+svg { display: block; }
+
+::selection { background: var(--color-point); color: #fff; }
+
+/* 키보드 접근성 */
+:focus-visible { outline: 2px solid var(--color-point); outline-offset: 3px; }
+
+.skip-link {
+  position: absolute; left: 50%; top: -100px; z-index: 999;
+  transform: translateX(-50%);
+  padding: var(--space-sm) var(--space-lg);
+  background: var(--color-main); color: var(--color-text-invert);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  transition: top var(--transition);
+}
+.skip-link:focus { top: 0; }
+
+
+/* ==========================================================================
+   02. 레이아웃 유틸
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-px);
+}
+
+.section { padding-block: var(--section-py); }
+
+/* 섹션 제목 — 좌우에 클래식 장식선 */
+.section__head { margin-bottom: var(--section-head-mb); text-align: center; }
+
+.section__title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-lg);
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-tight);
+  color: var(--color-text);
+}
+.section__title::before,
+.section__title::after {
+  content: "";
+  width: clamp(28px, 6vw, 64px);
+  height: 1px;
+  background: var(--color-sub);
+  opacity: .5;
+}
+
+
+/* ==========================================================================
+   03. 공통 컴포넌트
+   ========================================================================== */
+
+/* ── 로고 ──────────────────────────────────────────────── */
+.logo {
+  font-family: var(--font-display);
+  font-size: var(--fs-logo);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wider);
+  color: var(--color-main);
+  line-height: 1;
+}
+.logo--light { color: var(--color-text-invert); }
+
+/* ── 버튼 ──────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px var(--space-xl);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  letter-spacing: .02em;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+.btn--primary { background: var(--color-main); color: var(--color-text-invert); }
+.btn--primary:hover { background: var(--color-main-dark); transform: translateY(-1px); }
+.btn--sm { padding: 10px var(--space-lg); font-size: var(--fs-xs); }
+
+/* ── 이미지 슬롯 ───────────────────────────────────────────
+   이미지 파일을 넣기 전에는 안내 문구가 보이고,
+   images/ 폴더에 파일을 넣으면 자동으로 이미지가 표시됩니다.
+   (action.js 가 로드 실패를 감지해 .is-empty 를 붙입니다)
+   ------------------------------------------------------------ */
+.img-slot { position: relative; overflow: hidden; background: var(--color-bg-alt); }
+.img-slot img { width: 100%; height: 100%; object-fit: cover; }
+
+.img-slot.is-empty img { display: none; }
+.img-slot.is-empty::before {
+  content: attr(data-slot);
+  position: absolute; inset: var(--space-sm);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--space-md);
+  font-family: var(--font-sans);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  color: var(--color-sub);
+  text-align: center;
+  white-space: pre-line;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  background: repeating-linear-gradient(
+    45deg, transparent 0 10px, rgba(138, 115, 85, .05) 10px 20px
+  );
+}
+
+/* ── 스크롤 등장 애니메이션 ───────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+
+/* ==========================================================================
+   04. 헤더 & 모바일 내비
+   ========================================================================== */
+/* 기본 상태 = 히어로 위에 겹쳐지는 투명 헤더.
+   히어로를 벗어나면 action.js 가 .is-solid 를 붙여 크림 배경으로 전환합니다. */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: transparent;
+  box-shadow: none;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+.header.is-solid {
+  background: var(--color-bg);
+  box-shadow: var(--shadow-header);
+}
+
+/* 투명 상태: 어두운 히어로 위이므로 글자를 밝게 */
+.header:not(.is-solid) .logo { color: var(--color-text-invert); }
+.header:not(.is-solid) .gnb__link { color: var(--color-text-invert); }
+.header:not(.is-solid) .gnb__link:hover { color: var(--color-point-light); }
+.header:not(.is-solid) .gnb__link::after { background: var(--color-point-light); }
+.header:not(.is-solid) .nav-toggle__bar { background: var(--color-text-invert); }
+.header:not(.is-solid) .btn--primary {
+  background: transparent;
+  color: var(--color-text-invert);
+  box-shadow: inset 0 0 0 1px rgba(243, 238, 224, .55);
+}
+.header:not(.is-solid) .btn--primary:hover {
+  background: var(--color-text-invert);
+  color: var(--color-main);
+  box-shadow: none;
+}
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  height: var(--header-h);
+}
+
+/* 글로벌 내비 */
+.gnb__list { display: flex; gap: clamp(20px, 3.4vw, 56px); }
+.gnb__link {
+  position: relative;
+  display: block;
+  padding: var(--space-xs) 0;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+  transition: color var(--transition);
+}
+.gnb__link::after {
+  content: "";
+  position: absolute; left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: var(--color-point);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition);
+}
+.gnb__link:hover { color: var(--color-point); }
+.gnb__link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.header__actions { display: flex; align-items: center; gap: var(--space-md); }
+
+/* 드로어 안 구매하기 버튼 — 모바일에서만 노출 */
+.gnb__cta { display: none; }
+
+/* 햄버거 버튼 (모바일 전용) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px; height: 40px;
+  padding: var(--space-xs);
+}
+.nav-toggle__bar {
+  display: block;
+  width: 100%; height: 1.5px;
+  background: var(--color-main);
+  border-radius: var(--radius-pill);
+  transition: transform var(--transition), opacity var(--transition);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* 모바일 메뉴 배경 딤 */
+.nav-dim {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(43, 39, 35, .45);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.nav-dim.is-open { opacity: 1; }
+
+
+/* ==========================================================================
+   05. 히어로
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: var(--hero-h);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero__bg { position: absolute; inset: 0; }
+.hero__bg img { height: 100%; object-position: var(--hero-pos); }
+
+/* 왼쪽 텍스트 가독성을 위한 그라데이션 */
+.hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(20, 17, 13, .82) 0%,
+    rgba(20, 17, 13, .62) 34%,
+    rgba(20, 17, 13, .12) 62%,
+    rgba(20, 17, 13, 0) 85%
+  );
+}
+.hero__inner { position: relative; z-index: 1; }
+.hero__content { max-width: 560px; padding-block: var(--space-2xl); }
+
+.hero__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-hero);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--color-text-invert);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, .35);
+}
+.hero__desc {
+  margin-top: var(--space-lg);
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-light);
+  color: rgba(243, 238, 224, .88);
+}
+.hero__rule {
+  display: block;
+  width: 68px; height: 2px;
+  margin-top: var(--space-xl);
+  background: var(--color-point);
+  border-radius: var(--radius-pill);
+}
+
+
+/* ==========================================================================
+   06. 띠배너
+   ========================================================================== */
+.banner {
+  display: grid;
+  place-items: center;
+  min-height: var(--banner-h);
+  padding-block: var(--space-md);
+  background: var(--color-main);
+  text-align: center;
+}
+.banner__text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-lg);
+  font-family: var(--font-serif);
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-medium);
+  letter-spacing: .01em;
+  color: var(--color-point-light);
+}
+.banner__ornament { flex: none; width: 30px; color: var(--color-point-light); opacity: .85; }
+.banner__ornament svg { width: 100%; height: auto; transform: rotate(-28deg); }
+.banner__ornament--flip svg { transform: rotate(28deg) scaleX(-1); }
+
+
+/* ==========================================================================
+   07. 아이콘 6 — 핵심 혜택
+   ========================================================================== */
+.features { background: var(--color-bg); }
+
+.features__list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-md);
+  text-align: center;
+  border-left: 1px solid var(--color-border);
+}
+.feature:first-child { border-left: 0; }
+
+.feature__icon {
+  width: 46px; height: 46px;
+  margin-bottom: var(--space-xs);
+  color: var(--color-main);
+}
+.feature__icon svg { width: 100%; height: 100%; }
+
+.feature__title {
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--color-text);
+}
+.feature__desc {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-regular);
+  color: var(--color-text-sub);
+}
+
+
+/* ==========================================================================
+   08. 상품 4 — 제품 카드
+   ========================================================================== */
+.products { padding-top: 0; }
+
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--grid-gap);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+
+.card__thumb { aspect-ratio: 4 / 3; background: var(--color-bg-alt); }
+.card__thumb img { transition: transform .6s var(--ease); }
+.card:hover .card__thumb img { transform: scale(1.04); }
+
+.card__body {
+  padding: var(--space-lg) var(--space-md) var(--space-xl);
+  text-align: center;
+}
+.card__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  color: var(--color-text);
+}
+.card__tagline {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-xs);
+  color: var(--color-text-sub);
+}
+.card__price {
+  margin-top: var(--space-md);
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+}
+
+
+/* ==========================================================================
+   09. 특별 혜택 배너
+   ========================================================================== */
+.offer {
+  position: relative;
+  margin-top: var(--block-gap);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  isolation: isolate;
+}
+.offer__bg { position: absolute; inset: 0; z-index: -2; }
+.offer__bg img { height: 100%; }
+
+.offer::before {                              /* 왼쪽 텍스트 영역 가독성 */
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgba(214, 202, 174, .96) 0%,
+    rgba(214, 202, 174, .90) 38%,
+    rgba(214, 202, 174, .35) 62%,
+    rgba(214, 202, 174, 0) 82%
+  );
+}
+
+.offer__inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 4vw, 56px);
+  padding: var(--space-xl) clamp(24px, 4vw, 48px);
+  min-height: 180px;
+}
+
+/* LIMITED OFFER 뱃지 */
+.offer__badge {
+  flex: none;
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-xs);
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--color-sub);
+  border-radius: var(--radius-sm);
+  color: var(--color-main);
+}
+.offer__badge-rule { width: 48px; height: 1px; background: var(--color-sub); opacity: .6; }
+.offer__badge-text {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  line-height: 1.35;
+  text-align: center;
+}
+
+.offer__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--ls-tight);
+  color: var(--color-main-dark);
+}
+.offer__desc {
+  margin-top: var(--space-xs);
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+}
+.offer__desc span { color: var(--color-sub); margin-inline: var(--space-xxs); }
+.offer__content .btn { margin-top: var(--space-lg); }
+
+
+/* ==========================================================================
+   10. 푸터
+   ========================================================================== */
+.footer {
+  padding-top: var(--space-3xl);
+  background: var(--color-main);
+  color: var(--color-text-invert);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.6fr repeat(3, 1fr);
+  gap: var(--space-2xl) var(--grid-gap);
+  padding-bottom: var(--space-3xl);
+}
+
+.footer__tagline {
+  margin-top: var(--space-md);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-light);
+  color: rgba(243, 238, 224, .7);
+}
+
+/* SNS */
+.sns { display: flex; gap: var(--space-sm); margin-top: var(--space-lg); }
+.sns__link {
+  display: grid; place-items: center;
+  width: 34px; height: 34px;
+  border: 1px solid rgba(243, 238, 224, .35);
+  border-radius: var(--radius-pill);
+  color: rgba(243, 238, 224, .8);
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.sns__link svg { width: 17px; height: 17px; }
+.sns__link:hover {
+  color: var(--color-main);
+  background: var(--color-point);
+  border-color: var(--color-point);
+}
+
+.footer__col-title {
+  margin-bottom: var(--space-md);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  color: var(--color-text-invert);
+}
+.footer__list { display: grid; gap: var(--space-xs); }
+.footer__list li {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-light);
+  color: rgba(243, 238, 224, .72);
+}
+.footer__list a { transition: color var(--transition); }
+.footer__list a:hover { color: var(--color-point-light); }
+
+.footer__bottom {
+  padding-block: var(--space-lg);
+  border-top: 1px solid rgba(243, 238, 224, .14);
+  text-align: center;
+}
+.footer__copy {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-light);
+  letter-spacing: .02em;
+  color: rgba(243, 238, 224, .55);
+}
+
+
+/* ==========================================================================
+   11. 반응형
+   --------------------------------------------------------------------------
+   1024px 이하 : 태블릿 — 아이콘 3열, 상품 2열
+    768px 이하 : 모바일 — 내비 드로어, 배너 세로 정렬
+    480px 이하 : 소형 모바일 — 아이콘 2열, 상품 1열
+   ========================================================================== */
+
+/* ── 태블릿 ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .features__list { grid-template-columns: repeat(3, 1fr); row-gap: var(--space-2xl); }
+  .feature:nth-child(3n + 1) { border-left: 0; }
+
+  .products__grid { grid-template-columns: repeat(2, 1fr); }
+
+  .footer__grid { grid-template-columns: 1fr 1fr; }
+  .footer__brand { grid-column: 1 / -1; }
+}
+
+/* ── 모바일 ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --header-h: 64px;
+    --section-py: 72px;
+    /* 세로 화면에서는 좌우가 잘리므로 자전거(오른쪽)를 기준으로 잡습니다 */
+    --hero-h: 460px;
+    --hero-pos: 86% 50%;
+  }
+
+  /* 내비게이션 → 우측 드로어 */
+  .nav-toggle { display: flex; }
+
+  .gnb {
+    position: fixed; top: 0; right: 0; z-index: 95;
+    width: min(78vw, 300px); height: 100dvh;
+    padding: calc(var(--header-h) + var(--space-xl)) var(--space-xl) var(--space-xl);
+    background: var(--color-bg);
+    border-left: 1px solid var(--color-border);
+    transform: translateX(100%);
+    transition: transform var(--transition);
+    overflow-y: auto;
+  }
+  .gnb.is-open { transform: none; }
+
+  .gnb__list { flex-direction: column; gap: 0; }
+  .gnb__item { border-bottom: 1px solid var(--color-border); }
+  .gnb__link { padding: var(--space-md) 0; font-size: var(--fs-body); }
+  .gnb__link::after { display: none; }
+
+  .gnb__cta { display: block; margin-top: var(--space-xl); }
+  .gnb__cta .btn { width: 100%; }
+  .header__actions .btn--primary { display: none; }
+
+  body.is-nav-open { overflow: hidden; }
+
+  /* 히어로 */
+  .hero__overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(20, 17, 13, .72) 0%,
+      rgba(20, 17, 13, .55) 55%,
+      rgba(20, 17, 13, .35) 100%
+    );
+  }
+  .hero__content { max-width: none; text-align: center; }
+  .hero__rule { margin-inline: auto; }
+
+  /* 띠배너 */
+  .banner__text { flex-direction: column; gap: var(--space-sm); }
+  .banner__ornament { width: 26px; }
+  .banner__ornament svg,
+  .banner__ornament--flip svg { transform: none; }
+
+  /* 섹션 제목 */
+  .section__title { gap: var(--space-sm); }
+
+  /* 특별 혜택 배너 */
+  .offer::before {
+    background: linear-gradient(
+      180deg,
+      rgba(214, 202, 174, .96) 0%,
+      rgba(214, 202, 174, .92) 55%,
+      rgba(214, 202, 174, .55) 100%
+    );
+  }
+  .offer__inner {
+    flex-direction: column;
+    text-align: center;
+    padding-block: var(--space-2xl);
+  }
+
+  /* 푸터 */
+  .footer { padding-top: var(--space-2xl); }
+  .footer__grid { gap: var(--space-xl) var(--space-lg); padding-bottom: var(--space-2xl); }
+}
+
+/* ── 소형 모바일 ───────────────────────────────────────── */
+@media (max-width: 480px) {
+  .features__list { grid-template-columns: repeat(2, 1fr); row-gap: var(--space-xl); }
+  .feature { border-left: 0; }
+  .feature:nth-child(2n) { border-left: 1px solid var(--color-border); }
+
+  .products__grid { grid-template-columns: 1fr; }
+  .card__thumb { aspect-ratio: 16 / 10; }
+
+  .footer__grid { grid-template-columns: 1fr; text-align: center; }
+  .sns { justify-content: center; }
+}
